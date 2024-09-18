@@ -7,16 +7,21 @@
  <link rel="stylesheet" href="./style.css">
  <style>
   #imageZoom {
-   width: 350px;
-   height: 500px;
-   border: 5px solid red;
+   width: 330px;
+   height: 450px;
+   border: 5px solid rgb(0, 0, 0);
    position: relative;
+   border-radius: 15px;
+   overflow: hidden;
   }
   #imageZoom img {
    width: 100%;
    height: 100%;
    object-fit: cover;
    object-position: 0 0;
+   border-radius: 11px;
+   background-size: cover;
+   background-repeat: no-repeat;
   }
   #imageZoom::after {
    opacity: var(--opacity);
@@ -34,9 +39,18 @@
  </style>
 </head>
 <body>
- <div id="imageZoom" style="--bg-url: url('./img/01.jpg');
+ <div class="container">
+  <div class="img_cont">
+   <div class="img-choose" id="img-choose">
+    <img src="./img/01.jpg" alt="">
+    <img src="./img/02.jpg" alt="">
+    <img src="./img/03.jpg" alt="">
+   </div>
+   <div id="imageZoom" style="--bg-url: url('./img/01.jpg');
  --zoom-x: 0%; --zoom-y: 0%; --opacity: 0">
-  <img src="./img/01.jpg" alt="">
+  <img style="background-image: var(--bg-url);"  alt="">
+  </div>
+  </div>
  </div>
 
  <script>
@@ -49,12 +63,13 @@
    }
    imageZoom.style.setProperty('--zoom-x', pointer.x + '%');
    imageZoom.style.setProperty('--zoom-y', pointer.y + '%')
-   console.log(pointer);
+   // console.log(pointer);
    
   })
   imageZoom.addEventListener('mouseout', ()=> {
    imageZoom.style.setProperty('--opacity', '0');
   })
  </script>
+ <script src="./app.js"></script>
 </body>
 </html>
