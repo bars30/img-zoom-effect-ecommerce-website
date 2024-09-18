@@ -10,6 +10,7 @@
    width: 350px;
    height: 500px;
    border: 5px solid red;
+   position: relative;
   }
   #imageZoom img {
    width: 100%;
@@ -19,6 +20,9 @@
   }
   #imageZoom::after {
    display: var(--display);
+   position: absolute;
+   top: 0;
+   left: 0;
    content: '';
    width: 100%;
    height: 100%;
@@ -35,5 +39,22 @@
   <img src="./img/01.jpg" alt="">
  </div>
 
+ <script>
+  let imageZoom = document.getElementById('imageZoom');
+  imageZoom.addEventListener('mousemove', (event)=> {
+   imageZoom.style.setProperty('--display', 'block');
+   let pointer = {
+    x: (event.offsetX * 100) / imageZoom.offsetWidth,
+    y: (event.offsetY * 100) / imageZoom.offsetHeight
+   }
+   imageZoom.style.setProperty('--zoom-x', pointer.x + '%');
+   imageZoom.style.setProperty('--zoom-y', pointer.y + '%')
+   console.log(pointer);
+   
+  })
+  imageZoom.addEventListener('mouseout', ()=> {
+   imageZoom.style.setProperty('--display', 'none');
+  })
+ </script>
 </body>
 </html>
